@@ -28,23 +28,24 @@ Do not invent people, actions, causes, times, or events that cannot be observed.
 Return ONLY valid JSON in exactly this structure:
 
 {{
-  "visible_objects": [
-    "object 1",
-    "object 2"
-  ],
-  "visible_conditions": [
-    "condition 1",
-    "condition 2"
-  ],
-  "evidence": [
-    "evidence 1",
-    "evidence 2"
-  ],
-  "uncertainties": [
-    "uncertainty 1",
-    "uncertainty 2"
-  ]
+  "visible_objects": [],
+  "visible_conditions": [],
+  "evidence": [],
+  "possible_explanations": [],
+  "uncertainties": []
 }}
+
+The arrays are dynamic. Include all relevant observations supported by the image.
+Do not limit the number of objects, conditions, evidence items,
+possible explanations, or uncertainties to a fixed number.
+
+Based on the visible evidence and incident context, suggest 2 to 4
+meaningful plausible explanations for what may have happened.
+
+The possible explanations are hypotheses, not confirmed facts.
+Do not present any explanation as certain.
+Only suggest explanations that are reasonably supported by the
+visible evidence and provided context.
 
 Incident context:
 {context}
@@ -67,7 +68,7 @@ Incident context:
 
 if __name__ == "__main__":
 
-    image_path = "gemma/test_images/incident.jpg"
+    image_path = "test_images/incident.jpg"
 
     context = """
     This incident happened in an electronics laboratory.
@@ -87,6 +88,10 @@ if __name__ == "__main__":
 
     print("\nEvidence:")
     for item in evidence["evidence"]:
+        print("-", item)
+
+    print("\nPossible Explanations:")
+    for item in evidence["possible_explanations"]:
         print("-", item)
 
     print("\nUncertainties:")
