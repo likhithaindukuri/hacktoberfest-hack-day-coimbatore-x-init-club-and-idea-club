@@ -63,7 +63,6 @@ function App() {
       <button className="analyze-button" onClick={handleAnalyze}>
   Analyze Incident
 </button>
-{message && <p>{message}</p>}
     </div>
   );
 }
