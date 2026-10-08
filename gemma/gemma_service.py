@@ -2,6 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from google import genai
+from laya_decision import rank_incident_explanations
 
 load_dotenv()
 
@@ -74,26 +75,55 @@ if __name__ == "__main__":
     This incident happened in an electronics laboratory.
     """
 
-    evidence = analyze_incident(image_path, context)
+    gemma_evidence = analyze_incident(image_path, context)
 
     print("\nGemma 4 Incident Evidence\n")
 
     print("Visible Objects:")
-    for item in evidence["visible_objects"]:
+    for item in gemma_evidence["visible_objects"]:
         print("-", item)
 
     print("\nVisible Conditions:")
-    for item in evidence["visible_conditions"]:
+    for item in gemma_evidence["visible_conditions"]:
         print("-", item)
 
     print("\nEvidence:")
-    for item in evidence["evidence"]:
+    for item in gemma_evidence["evidence"]:
         print("-", item)
 
     print("\nPossible Explanations:")
-    for item in evidence["possible_explanations"]:
-        print("-", item)
+    for index, item in enumerate(
+        gemma_evidence["possible_explanations"],
+        start=1
+    ):
+        print(f"{index}. {item}")
 
     print("\nUncertainties:")
-    for item in evidence["uncertainties"]:
+    for item in gemma_evidence["uncertainties"]:
         print("-", item)
+
+    laya_result = rank_incident_explanations(
+        gemma_result=gemma_evidence,
+        context=context
+    )
+
+    print("\n" + "=" * 55)
+    print("Laya Decision and Confidence")
+    print("=" * 55)
+
+    print("\nMost likely explanation:")
+    print("-", laya_result["selected_explanation"])
+
+    print("\nLaya choice confidence:")
+    print("-", laya_result["choice_confidence"])
+
+    print("\nAll explanation probabilities:")
+
+    for key, probability in laya_result["all_probabilities"].items():
+        print(f"- {key}: {probability:.2%}")
+
+    print("\nEvidence support score:")
+    print("-", laya_result["support_score"])
+
+    print("\nHuman review decision:")
+    print("-", laya_result["human_review"])
