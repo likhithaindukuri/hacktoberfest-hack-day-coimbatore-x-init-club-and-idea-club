@@ -1,0 +1,72 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: #f5f7fa;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 36px;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.upload-button {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  background: white;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.preview {
+  margin: 20px 0;
+}
+
+.preview img {
+  width: 300px;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+textarea {
+  width: 400px;
+  padding: 12px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: vertical;
+  margin-bottom: 20px;
+}
+
+.analyze-button {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  background: #222;
+  color: white;
+}
+
+.analyze-button:hover {
+  opacity: 0.85;
+}
