@@ -1,4 +1,4 @@
-# [AI "What Went Wrong?" — Incident Detective]
+# AI "What Went Wrong?" — Incident Detective
 AI "What Went Wrong?" — Incident Detective
 > An AI-powered incident analysis system that uses Gemma 4 to understand an incident scene and Laya to evaluate and rank possible explanations based on the extracted evidence.
 
