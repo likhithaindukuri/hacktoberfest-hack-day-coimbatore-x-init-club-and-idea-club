@@ -1,6 +1,6 @@
 import laya
 
-agent = laya.load("convaiinnovations/laya", subfolder="typed-decisions")
+agent = laya.load("convaiinnovations/laya")
 
 state = "Wet patch on floor near aisle 3. No warning sign visible. Worker slipped."
 
