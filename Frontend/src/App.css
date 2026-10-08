@@ -1,72 +1,641 @@
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  background: #f5f7fa;
-  font-family: Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #020304;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* =====================================================
+   MAIN INVESTIGATION BACKGROUND
+===================================================== */
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+
+  padding: 55px 20px 80px;
+
+  position: relative;
+  overflow: hidden;
+
+  text-align: center;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.90)
+    ),
+    url("/investigation-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* =====================================================
+   BLUE INVESTIGATION LIGHT
+===================================================== */
+
+.app::before {
+  content: "";
+
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  top: -250px;
+  left: -200px;
+
+  border-radius: 50%;
+
+  background: rgba(0, 80, 255, 0.18);
+
+  filter: blur(120px);
+
+  animation: blueLight 8s ease-in-out infinite alternate;
+
+  pointer-events: none;
+}
+
+@keyframes blueLight {
+  from {
+    transform: translate(0, 0);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translate(120px, 80px);
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   RED INVESTIGATION LIGHT
+===================================================== */
+
+.app::after {
+  content: "";
+
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  right: -200px;
+  top: 100px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 0, 45, 0.15);
+
+  filter: blur(120px);
+
+  animation: redLight 7s ease-in-out infinite alternate;
+
+  pointer-events: none;
+}
+
+@keyframes redLight {
+  from {
+    transform: translate(0, 0);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translate(-100px, 100px);
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   DIGITAL GRID
+===================================================== */
+
+.app {
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.90)
+    ),
+    linear-gradient(
+      rgba(60, 100, 180, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(60, 100, 180, 0.035) 1px,
+      transparent 1px
+    ),
+    url("/investigation-bg.jpg");
+
+  background-size:
+    cover,
+    45px 45px,
+    45px 45px,
+    cover;
+
+  background-position:
+    center,
+    center,
+    center,
+    center;
+}
+
+/* =====================================================
+   SCANNING LINE
+===================================================== */
+
+.app .scan-line {
+  display: none;
+}
+
+/* =====================================================
+   HEADINGS
+===================================================== */
+
 h1 {
-  margin-bottom: 10px;
-  font-size: 36px;
+  position: relative;
+  z-index: 10;
+
+  margin: 0;
+
+  font-size: 12px;
+
+  letter-spacing: 7px;
+
+  font-weight: 700;
+
+  color: #5c94ff;
+
+  text-shadow:
+    0 0 8px rgba(40, 110, 255, 0.9),
+    0 0 20px rgba(40, 110, 255, 0.4);
+
+  animation: fadeDown 1s ease;
 }
 
 h2 {
-  margin-bottom: 30px;
-  font-size: 28px;
+  position: relative;
+  z-index: 10;
+
+  margin: 12px 0 35px;
+
+  font-size: 55px;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff 20%,
+    #5e8fff 50%,
+    #ff3158 85%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: titleReveal 1s ease;
 }
+
+h2::after {
+  content: "";
+
+  display: block;
+
+  width: 100px;
+  height: 3px;
+
+  margin: 18px auto 0;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #246bff,
+    #ff1744
+  );
+
+  box-shadow:
+    0 0 10px #246bff,
+    0 0 20px #ff1744;
+}
+
+/* =====================================================
+   UPLOAD AREA
+===================================================== */
 
 .upload-section {
-  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+
+  margin-bottom: 25px;
 }
 
+/* =====================================================
+   GLASS UPLOAD BUTTON
+===================================================== */
+
 .upload-button {
-  display: inline-block;
-  padding: 12px 24px;
-  border: 1px solid #333;
-  border-radius: 8px;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 280px;
+
+  padding: 18px 35px;
+
+  color: #ffffff;
+
+  background: rgba(8, 12, 20, 0.65);
+
+  border: 1px solid rgba(70, 120, 255, 0.6);
+
+  border-radius: 14px;
+
+  backdrop-filter: blur(15px);
+
+  -webkit-backdrop-filter: blur(15px);
+
   cursor: pointer;
-  background: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  box-shadow:
+    inset 0 0 20px rgba(50, 100, 255, 0.04),
+    0 10px 40px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(0, 70, 255, 0.15);
+
+  transition: all 0.35s ease;
+}
+
+.upload-button::before {
+  content: "＋";
+
+  margin-right: 10px;
+
+  font-size: 20px;
+
+  color: #4285ff;
+
+  text-shadow:
+    0 0 10px #4285ff;
+}
+
+.upload-button:hover {
+  transform: translateY(-5px);
+
+  border-color: #4285ff;
+
+  box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(0, 90, 255, 0.5);
 }
 
 input[type="file"] {
   display: none;
 }
 
+/* =====================================================
+   EVIDENCE GLASS CARD
+===================================================== */
+
 .preview {
-  margin: 20px 0;
+  position: relative;
+  z-index: 10;
+
+  width: 500px;
+
+  max-width: 100%;
+
+  margin: 30px auto;
+
+  padding: 14px;
+
+  background: rgba(5, 8, 14, 0.68);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 18px;
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.75),
+    0 0 30px rgba(0, 80, 255, 0.12);
+
+  animation: cardReveal 0.7s ease;
+}
+
+/* Evidence label */
+
+.preview::before {
+  content: "●  EVIDENCE // INCIDENT IMAGE";
+
+  display: block;
+
+  padding: 4px 5px 13px;
+
+  text-align: left;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  color: #71809b;
+
+  text-shadow:
+    0 0 8px rgba(80, 130, 255, 0.4);
 }
 
 .preview img {
-  width: 300px;
-  max-height: 250px;
+  display: block;
+
+  width: 100%;
+
+  max-height: 330px;
+
   object-fit: contain;
-  border-radius: 10px;
+
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+/* =====================================================
+   INCIDENT CONTEXT GLASS PANEL
+===================================================== */
 
 textarea {
-  width: 400px;
-  padding: 12px;
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  font-size: 16px;
+  position: relative;
+  z-index: 10;
+
+  display: block;
+
+  width: 550px;
+
+  max-width: 100%;
+
+  min-height: 140px;
+
+  margin: 30px auto;
+
+  padding: 20px;
+
+  color: #ffffff;
+
+  background: rgba(5, 8, 14, 0.68);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 16px;
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  font-family: Arial, sans-serif;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+
   resize: vertical;
-  margin-bottom: 20px;
+
+  outline: none;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    inset 0 0 25px rgba(0, 0, 0, 0.25);
+
+  transition: all 0.35s ease;
 }
 
+textarea::placeholder {
+  color: #68748a;
+}
+
+textarea:focus {
+  border-color: rgba(55, 115, 255, 0.8);
+
+  box-shadow:
+    0 0 0 1px rgba(40, 100, 255, 0.15),
+    0 0 30px rgba(0, 90, 255, 0.25);
+}
+
+/* =====================================================
+   ANALYZE BUTTON
+===================================================== */
+
 .analyze-button {
-  padding: 14px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  position: relative;
+  z-index: 10;
+
+  padding: 18px 50px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 14px;
+
+  color: #ffffff;
+
   font-size: 16px;
-  background: #222;
-  color: white;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    100deg,
+    #145cff,
+    #356bff,
+    #ed1746
+  );
+
+  background-size: 200% 100%;
+
+  box-shadow:
+    0 10px 30px rgba(0, 70, 255, 0.35),
+    0 0 25px rgba(255, 20, 60, 0.2);
+
+  animation: buttonFlow 5s ease infinite;
+
+  transition: all 0.3s ease;
+}
+
+.analyze-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -6px;
+
+  border-radius: 17px;
+
+  background: linear-gradient(
+    90deg,
+    #155cff,
+    transparent,
+    #ff1744
+  );
+
+  filter: blur(10px);
+
+  opacity: 0.45;
+
+  z-index: -1;
 }
 
 .analyze-button:hover {
-  opacity: 0.85;
+  transform: translateY(-5px) scale(1.03);
+
+  box-shadow:
+    0 15px 40px rgba(0, 80, 255, 0.55),
+    0 0 45px rgba(255, 20, 60, 0.35);
+}
+
+.analyze-button:active {
+  transform: scale(0.97);
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+p {
+  position: relative;
+  z-index: 10;
+
+  margin-top: 25px;
+
+  color: #91a0ba;
+
+  font-size: 14px;
+
+  letter-spacing: 0.3px;
+
+  animation: fadeUp 0.5s ease;
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .app {
+    padding: 40px 15px 60px;
+
+    background-attachment: scroll;
+  }
+
+  h1 {
+    font-size: 10px;
+    letter-spacing: 4px;
+  }
+
+  h2 {
+    font-size: 38px;
+  }
+
+  .upload-button {
+    width: 100%;
+    max-width: 330px;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  .analyze-button {
+    width: 100%;
+    max-width: 330px;
+  }
 }
